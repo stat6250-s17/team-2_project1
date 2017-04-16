@@ -60,6 +60,12 @@ data flights_analytic_file;
        Distance
        ArrTime
        CRSArrTime
+       DepDelay
+       Diverted
+       WeatherDelay
+       NASDelay
+       SecurityDelay
+       LateAircraftDelay
     ;
     keep
        Year
@@ -74,52 +80,12 @@ data flights_analytic_file;
        Distance
        ArrTime
        CRSArrTime
+       DepDelay
+       Diverted
+       WeatherDelay
+       NASDelay
+       SecurityDelay
+       LateAircraftDelay
     ;
     set flights_raw;
 run;
-
-<<<<<<< HEAD
-=======
-
-data flights_analytic_file_AK;
-    retain
-        Year
-        Month
-        DayofMonth
-        FlightNum
-        UniqueCarrier
-        Distance
-        ArrTime
-        CRSArrTime
-        ArrDelay
-		DepDelay
-		Cancelled
-		Diverted
-		CarrierDelay
-		WeatherDelay
-		NASDelay
-		SecurityDelay
-		LateAircraftDelay
-    ;
-    keep
-       Year
-       Month
-       DayofMonth
-       FlightNum
-       UniqueCarrier
-       Distance
-       ArrTime
-       CRSArrTime
-       ArrDelay
-	   DepDelay
-	   Cancelled
-	   Diverted
-	   CarrierDelay
-	   WeatherDelay
-	   NASDelay
-	   SecurityDelay
-	   LateAircraftDelay
-    ;
-    set flights_raw;
-run;
->>>>>>> refs/heads/initial-buildout-of-data-prep
