@@ -83,13 +83,13 @@ data flights_analytic_file_KV;
     ;
     keep
        Year
-        Month
-        DayofMonth
-        FlightNum
-        UniqueCarrier
-        Distance
-        ArrTime
-        CRSArrTime
+       Month
+       DayofMonth
+       FlightNum
+       UniqueCarrier
+       Distance
+       ArrTime
+       CRSArrTime
     ;
     set flights_raw;
 run;
