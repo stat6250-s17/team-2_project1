@@ -68,6 +68,7 @@ data flights_analytic_file_AA;
     set flights_raw;
 run;
 
+*This dataset is for calculating delay for each unique carriers across time to see which carrier have the lowest delay time;
 
 data flights_analytic_file_KV;
     retain
