@@ -5,17 +5,17 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 %include '.\STAT6250-02_s17-team-02_project1_data_preparation.sas';
 
 *Print average delay for each carrier;
-proc means mean noprint data=flights_analytic_file_KV;
+proc means mean noprint data=flights_analytic_file;
     class UniqueCarrier;
     var ArrDelay;
-    output out=flights_analytic_file_KV_temp;
+    output out=flights_analytic_file_temp;
 run;
 
-proc sort data=flights_analytic_file_KV_temp(where=(_STAT_="MEAN"));
+proc sort data=flights_analytic_file_temp(where=(_STAT_="MEAN"));
     by descending ArrDelay;
 run;
 
-proc print noobs data=flights_analytic_file_KV_temp(obs=20);
+proc print noobs data=flights_analytic_file_temp(obs=20);
     id UniqueCarrier;
     var ArrDelay;
 run;
