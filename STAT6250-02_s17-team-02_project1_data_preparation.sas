@@ -3,7 +3,7 @@
 
 [Experimental Units] Flight
 
-[Number of Observations] 573,903   (3 months of data flights from Jan to March 2008)
+[Number of Observations] 573,903   *(Changes: we picked 3 months of data flights from Jan to March 2008)*
 
 [Number of Features] 29 
 
@@ -42,4 +42,29 @@ proc sort nodupkey data=flights_raw dupout=flights_raw_dups out=_null_;
     by Month DayofMonth FlightNum;
 run;
 
+
+* build analytic dataset from flights dataset with the least number of columns and
+minimal cleaning/transformation needed to address research questions in
+corresponding data-analysis files;
+data flights_analytic_file;
+    retain
+        Month
+        DayofMonth
+        UniqueCarrier
+        ArrDelay
+        DepDelay
+        Origin
+        Cancelled
+    ;
+    keep
+        Month
+        DayofMonth
+        UniqueCarrier
+        ArrDelay
+        DepDelay
+        Origin
+        Cancelled
+    ;
+    set flights_raw;s
+run;
 
