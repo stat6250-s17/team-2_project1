@@ -32,7 +32,7 @@ run;
 proc import
     file=tempfile
     out=flights_raw
-    dbms=xls;
+    dbms=csv;
 run;
 filename tempfile clear;
 
