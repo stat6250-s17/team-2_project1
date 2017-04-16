@@ -46,52 +46,35 @@ run;
 * build analytic dataset from flights dataset with the least number of columns and
 minimal cleaning/transformation needed to address research questions in
 corresponding data-analysis files;
-data flights_analytic_file_AA;
+data flights_analytic_file;
     retain
-        Month
-        DayofMonth
-        UniqueCarrier
-        ArrDelay
-        DepDelay
-        Origin
-        Cancelled
-    ;
-    keep
-        Month
-        DayofMonth
-        UniqueCarrier
-        ArrDelay
-        DepDelay
-        Origin
-        Cancelled
-    ;
-    set flights_raw;
-run;
-
-*This dataset is for calculating delay for each unique carriers across time to see which carrier have the lowest delay time;
-
-data flights_analytic_file_KV;
-    retain
-        Year
-        Month
-        DayofMonth
-        FlightNum
-        UniqueCarrier
-        Distance
-        ArrTime
-        CRSArrTime
-        ArrDelay
+       Year
+       Month
+       DayofMonth
+       UniqueCarrier
+       ArrDelay
+       DepDelay
+       Origin
+       Cancelled
+       FlightNum
+       Distance
+       ArrTime
+       CRSArrTime
     ;
     keep
        Year
        Month
        DayofMonth
-       FlightNum
        UniqueCarrier
+       ArrDelay
+       DepDelay
+       Origin
+       Cancelled
+       FlightNum
        Distance
        ArrTime
        CRSArrTime
-       ArrDelay
     ;
     set flights_raw;
 run;
+
