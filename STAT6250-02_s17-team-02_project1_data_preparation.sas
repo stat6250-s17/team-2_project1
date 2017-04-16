@@ -93,3 +93,46 @@ data flights_analytic_file_KV;
     ;
     set flights_raw;
 run;
+
+
+data flights_analytic_file_AK;
+    retain
+        Year
+        Month
+        DayofMonth
+        FlightNum
+        UniqueCarrier
+        Distance
+        ArrTime
+        CRSArrTime
+        ArrDelay
+		DepDelay
+		Cancelled
+		Diverted
+		CarrierDelay
+		WeatherDelay
+		NASDelay
+		SecurityDelay
+		LateAircraftDelay
+    ;
+    keep
+       Year
+       Month
+       DayofMonth
+       FlightNum
+       UniqueCarrier
+       Distance
+       ArrTime
+       CRSArrTime
+       ArrDelay
+	   DepDelay
+	   Cancelled
+	   Diverted
+	   CarrierDelay
+	   WeatherDelay
+	   NASDelay
+	   SecurityDelay
+	   LateAircraftDelay
+    ;
+    set flights_raw;
+run;
