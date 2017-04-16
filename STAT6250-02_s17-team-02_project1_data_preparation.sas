@@ -46,7 +46,7 @@ run;
 * build analytic dataset from flights dataset with the least number of columns and
 minimal cleaning/transformation needed to address research questions in
 corresponding data-analysis files;
-data flights_analytic_file;
+data flights_analytic_file_AA;
     retain
         Month
         DayofMonth
@@ -65,6 +65,30 @@ data flights_analytic_file;
         Origin
         Cancelled
     ;
-    set flights_raw;s
+    set flights_raw;
 run;
 
+
+data flights_analytic_file_KV;
+    retain
+        Year
+        Month
+        DayofMonth
+        FlightNum
+        UniqueCarrier
+        Distance
+        ArrTime
+        CRSArrTime
+    ;
+    keep
+       Year
+        Month
+        DayofMonth
+        FlightNum
+        UniqueCarrier
+        Distance
+        ArrTime
+        CRSArrTime
+    ;
+    set flights_raw;
+run;
