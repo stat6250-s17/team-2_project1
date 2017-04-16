@@ -12,7 +12,7 @@ proc means mean noprint data=flights_analytic_file_KV;
 run;
 
 proc sort data=flights_analytic_file_KV_temp(where=(_STAT_="MEAN"));
-    by descending Percent_Eligible_ArrDelay;
+    by descending ArrDelay;
 run;
 
 proc print noobs data=flights_analytic_file_KV_temp(obs=20);
