@@ -50,7 +50,7 @@ proc print noobs data=flights_analytic_file_temp(obs=20);
     var ArrDelay;
 run;
 
-*Question2: Which months correlate to the weather delay the most?
+*Question3: Which months correlate to the weather delay the most?
 Rationale: We want to know which months tend to have weather delay when flying so we can avoid travelling during those months
 Methodology: Use PROC MEANS to compute mean of WeatherDelay, and output the results to a temporary dataset.
 use PROC SORT to extract and sort the WeatherDelay mean by the month from the temporary dataset.
