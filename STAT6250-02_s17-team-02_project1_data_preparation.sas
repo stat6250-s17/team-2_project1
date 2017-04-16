@@ -80,6 +80,7 @@ data flights_analytic_file_KV;
         Distance
         ArrTime
         CRSArrTime
+        ArrDelay
     ;
     keep
        Year
@@ -90,6 +91,7 @@ data flights_analytic_file_KV;
        Distance
        ArrTime
        CRSArrTime
+       ArrDelay
     ;
     set flights_raw;
 run;
