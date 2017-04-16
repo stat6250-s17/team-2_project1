@@ -18,13 +18,24 @@ See included file for dataset properties
 
 
 /*
-...................................................................................................
+*******************************************************************************;
 
-Question 1:  what is the number of delayed departure flights arrived within 15 minutes of the scheduled arrival time? 
+Question 1:  what is the number of delayed departure flights arrived within 15 
+minutes of the scheduled arrival time? 
 
-Rationale: To identify the number of flight that made an acceptable delay(arrived within 15 min. of the scheduled time)
-...................................................................................................
+Rationale: To identify the number of flight that made an acceptable delay
+(arrived within 15 min. of the scheduled time)
 
+Methodology: Use Where to create a subset data that meets our criteria "arrived
+within 15 minutes of the scheduled arrival time". Then, by using PROC CONTENTS 
+to get then number of observation on the subset dataset.
+
+Limitations: PROC CONTENTS lists all the information about the dataset not the 
+number of rows only.
+
+Possible Follow-up Steps: None
+
+*******************************************************************************;
 */ 
 
 
@@ -39,9 +50,23 @@ run;
 
 
 /*
-Question 2: Considering delayed departure time, which three airports have the worst performance? 
+*******************************************************************************;
+Question 2: Considering delayed departure time, which three airports have the
+worst performance? 
 
-(Rationale: To identify the airport that has the highest frequency of delayed flights)
+(Rationale: To identify the 3 airports that have the highest frequency of 
+delayed flights)
+
+Methodology: Use PROC MEANS to compute the mean of DepDelay for each Origin 
+"Departure Airports", and output the results to a temportatry dataset "temp".
+Use PROC SORT extract and sort just the means the temporary dateset, and use
+PROC PRINT to print just the first 3 observations from the temporary dataset.
+
+Limitations: This methodology does not account for Origion with missing data.
+
+Possible Follow-up Steps: checking the DepDelay values  for any missing data 
+so that the means computed is more accurate.
+*******************************************************************************;
 */
 proc means data=one;
     class Origin;
@@ -60,9 +85,21 @@ run;
 
 
 /* 
+*******************************************************************************;
 Question 3: what percentage of the delayed flights were cancelled per carrier? 
 
 (Rationale: To identify the frequency of cancelled flights per carrier)
+
+
+Methodology: Using PROC FREQ to create a table of frequency for cancelled 
+flights per carrier.
+
+Limitations: This methodology does not account for missing data.
+
+Possible Follow-up Steps: checking the Cancelled variable for any missing data 
+so that the means computed is more accurate.
+
+*******************************************************************************;
 */
 
 proc freq data=one;
