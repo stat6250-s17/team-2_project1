@@ -24,9 +24,12 @@ Rationale: We want to know which carrier is bettter and have the lowest
 delay time.
 Methodology: Use PROC MEANS to compute the mean of ArrDelay (arrive delay time),
 and output the results to a temporary dataset. Use PROC SORT extract and sort 
-just the means of the temporary dataset.
-Limitations: 
-Possible Follow-up Steps:
+just the means of the temporary dataset and we want to sort by UniqueCarrier.
+Limitations: This methodology does not account for missing value for arrive delay
+time. 
+Possible Follow-up Steps: We can clean the data and convert missing value cell to
+"." so that SAS knows it's a missing value and exclude it from the calculation of
+Mean. 
 ;
 
 proc means mean noprint data=flights_analytic_file;
@@ -50,8 +53,11 @@ air carrier so we can avoid traveling during those months.
 Methodology: Use PROC MEANS to compute mean of ArrDelay, and output the 
 results to a temporary dataset. use PROC SORT extract and sort by the month 
 from the temporary dataset.
-Limitations: 
-Possible Follow-up Steps:
+Limitations: This methodology does not account for missing value for arrive delay
+time. 
+Possible Follow-up Steps: We can clean the data and convert missing value cell to
+"." so that SAS knows it's a missing value and exclude it from the calculation of
+Mean. 
 ;
 
 proc means mean noprint data=flights_analytic_file;
@@ -75,8 +81,12 @@ so we can avoid travelling during those months
 Methodology: Use PROC MEANS to compute mean of WeatherDelay, and output the 
 results to a temporary dataset. use PROC SORT to extract and sort the 
 WeatherDelay mean by the month from the temporary dataset.
-Limitations: 
-Possible Follow-up Steps:;
+Limitations: This methodology does not account for missing value for arrive delay
+time.
+Possible Follow-up Steps: We can clean the data and convert missing value cell to
+"." so that SAS knows it's a missing value and exclude it from the calculation of
+Mean. 
+;
 
 proc means mean noprint data=flights_analytic_file;
     class Month;
