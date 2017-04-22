@@ -1,9 +1,15 @@
+*******************************************************************************;
+**************** 80-character banner for column width reference ***************;
+* (set window width to banner width to calibrate line length to 80 characters *;
+*******************************************************************************;
+
 *
 [Dataset Name] Airlines Delay
 
 [Experimental Units] Flight
 
-[Number of Observations] 573,903   *(Changes: we picked 3 months of data flights from Jan to March 2008)*
+[Number of Observations] 573,903   *(Changes: we picked 3 months of data flights
+from Jan to March 2008)*
 
 [Number of Features] 29 
 
@@ -11,7 +17,8 @@
 
 [Data Dictionary] https://www.kaggle.com/giovamata/airlinedelaycauses
 
-[Unique ID Schema] Composite key, a combination of the columns: UniqueCarrier, FlightNum, Year, Month and DayofMonth .
+[Unique ID Schema] Composite key, a combination of the columns: UniqueCarrier,
+FlightNum, Year, Month and DayofMonth .
 ;
 
 
@@ -36,16 +43,15 @@ proc import
 run;
 filename tempfile clear;
 
-
 * check raw flights dataset for duplicates with respect to its composite key;
 proc sort nodupkey data=flights_raw dupout=flights_raw_dups out=_null_;
     by Month DayofMonth FlightNum;
 run;
 
-
-* build analytic dataset from flights dataset with the least number of columns and
-minimal cleaning/transformation needed to address research questions in
+* build analytic dataset from flights dataset with the least number of columns
+and minimal cleaning/transformation needed to address research questions in
 corresponding data-analysis files;
+
 data flights_analytic_file;
     retain
        Year
