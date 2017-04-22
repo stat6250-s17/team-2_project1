@@ -29,12 +29,12 @@ Methodology: Use PROC MEANS to compute the mean of ArrDelay (arrive delay time),
 and output the results to a temporary dataset. Use PROC SORT extract and sort 
 just the means of the temporary dataset and we want to sort by UniqueCarrier.
 
-Limitations: This methodology does not account for missing values for arrive delay
-time. 
+Limitations: This methodology does not account for missing values for arrive 
+delay time. 
 
 Possible Follow-up Steps: We can clean the data and convert missing values to
-"." so that SAS knows it's a missing value and exclude it from the calculation of
-Mean. 
+"." so that SAS knows it's a missing value and exclude it from the calculation
+of Mean. 
 ;
 
 proc means mean noprint data=flights_analytic_file;
@@ -61,12 +61,12 @@ Methodology: Use PROC MEANS to compute mean of ArrDelay, and output the
 results to a temporary dataset. use PROC SORT extract and sort by the month 
 from the temporary dataset.
 
-Limitations: This methodology does not account for missing values for arrive delay
-time. 
+Limitations: This methodology does not account for missing values for arrive 
+delay time. 
 
-Possible Follow-up Steps: We can clean the data and convert missing values cell to
-"." so that SAS knows it's a missing value and exclude it from the calculation of
-Mean. 
+Possible Follow-up Steps: We can clean the data and convert missing values cell
+to "." so that SAS knows it's a missing value and exclude it from the 
+calculation of Mean. 
 ;
 
 proc means mean noprint data=flights_analytic_file;
@@ -93,12 +93,12 @@ Methodology: Use PROC MEANS to compute mean of WeatherDelay, and output the
 results to a temporary dataset. use PROC SORT to extract and sort the 
 WeatherDelay mean by the month from the temporary dataset.
 
-Limitations: This methodology does not account for missing values for arrive delay
-time.
+Limitations: This methodology does not account for missing values for arrive
+delay time.
 
-Possible Follow-up Steps: We can clean the data and convert missing values cell to
-"." so that SAS knows it's a missing value and exclude it from the calculation of
-Mean. 
+Possible Follow-up Steps: We can clean the data and convert missing values cell
+to "." so that SAS knows it's a missing value and exclude it from the 
+calculation of Mean. 
 ;
 
 proc means mean noprint data=flights_analytic_file;
