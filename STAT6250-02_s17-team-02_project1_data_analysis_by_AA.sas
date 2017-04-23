@@ -47,7 +47,7 @@ condition
 *******************************************************************************;
 */ 
 
-'''sas
+
 data Delay15;
     set flights_analytic_file;
     where ArrDelay<15;
@@ -55,7 +55,7 @@ run;
 
 proc contents data=Delay15 varnum;
 run;
-'''
+
 
 /*
 *******************************************************************************;
@@ -77,7 +77,7 @@ so that the means computed is more accurate.
 *******************************************************************************;
 */
 
-'''sas
+
 proc means data=flights_analytic_file;
     class Origin;
     var DepDelay;
@@ -93,7 +93,7 @@ proc print noobs data=temp(obs=3);
     var DepDelay;
 run;
 
-'''
+
 
 
 /* 
@@ -112,10 +112,10 @@ so that the means computed is more accurate.
 *******************************************************************************;
 */
 
-'''sas
+
 proc freq data=flights_analytic_file;
     table Cancelled*UniqueCarrier;
 run;
 
 
-'''
+
