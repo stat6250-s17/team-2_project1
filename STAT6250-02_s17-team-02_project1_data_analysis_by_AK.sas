@@ -1,4 +1,21 @@
+***************************************************************************************************;
+***************************************************************************************************;
+* (set window width to banner width to calibrate line length to 100 characters *;
+***************************************************************************************************;
+*
+This file uses the following analytic dataset to address several research
+questions regarding flight delay in US airports
+Dataset Name: DelayedFlight.csv created in external file having three months
+STAT6250-02_s17-team-02_project1_data_preparation.sas, which is assumed to be
+in the same directory as this file
+See included file for dataset properties
+;
 
+* environmental setup;
+
+* set relative file import path to current directory (using standard SAS trick;
+X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,
+%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";
 * load external file that generates analytic dataset FRPM1516_analytic_file;
 %include '.\STAT6250-02_s17-team-02_project1_data_preparation.sas';
 
@@ -6,10 +23,14 @@
 ...................................................................................................
 Question 1:  What is the average weather delay of each carrier?
 Rationale: To identify the top 10 carriers which are most impacted due to weather condition?
-Methodology: Using KEEP and IF Command we have only selected required variables and removed all records which are not delayed using weather.
-			We have created new temp data set to change the data type from character to numeric to do statistical analysis. Use PROC MEAN to compute the mean of weather delay and store the result in temporary dataset. Used PROC SORT to sort the temporary dataset.
+Methodology: Using KEEP and IF Command we have only selected required variables and removed all 
+			records which are not delayed using weather.
+			We have created new temp data set to change the data type from character to numeric to 
+			do statistical analysis. Use PROC MEAN to compute the mean of weather delay and store 
+			the result in temporary dataset. Used PROC SORT to sort the temporary dataset.
 ...................................................................................................
 */ 
+
 
 
 DATA flights_analytics_q1;
@@ -46,10 +67,14 @@ run;
 ...................................................................................................
 Question 2:  What is the average weather delay of each airport?
 Rationale: To identify the top 10 airports which are most impacted due to weather condition?
-Methodology: Using KEEP and IF Command we have only selected required variables and removed all records which are not delayed using weather.
-			We have created new temp data set to change the data type from character to numeric to do statistical analysis. Use PROC MEAN to compute the mean of weather delay and store the result in temporary dataset. Used PROC SORT to sort the temporary dataset.
+Methodology: Using KEEP and IF Command we have only selected required variables and removed all 
+			records which are not delayed using weather.
+			We have created new temp data set to change the data type from character to numeric to 
+			do statistical analysis. Use PROC MEAN to compute the mean of weather delay and store 
+			the result in temporary dataset. Used PROC SORT to sort the temporary dataset.
 ...................................................................................................
 */ 
+
 
 
 DATA flights_analytics_weather;
@@ -87,7 +112,8 @@ run;
 ...................................................................................................
 Question 3:  What is the percentage diverted flights of each carrier?
 Rationale: To identify the carriers which flights are diverted most of the time?
-Methodology: Using PROC SORT commands sort the data set. Using PROC FREQ command percentage of diverted flights will be shown. 
+Methodology: Using PROC SORT commands sort the data set. Using PROC FREQ command percentage of 
+			diverted flights will be shown. 
 ...................................................................................................
 */ 
 
