@@ -3,6 +3,7 @@
 **************** 80-character banner for column width reference ***************;
 * (set window width to banner width to calibrate line length to 80 characters *;
 *******************************************************************************;
+
 *
 This file uses the following analytic dataset to address several research
 questions regarding flight delay in US airports
@@ -21,7 +22,6 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,
 
 * load external file that generates analytic dataset FRPM1516_analytic_file;
 %include '.\STAT6250-02_s17-team-02_project1_data_preparation.sas';
-
 
 /*
 *******************************************************************************;
@@ -56,7 +56,6 @@ run;
 proc contents data=Delay15 varnum;
 run;
 
-
 /*
 *******************************************************************************;
 Question 2: Considering delayed departure time, which three airports have the
@@ -77,7 +76,6 @@ so that the means computed is more accurate.
 *******************************************************************************;
 */
 
-
 proc means data=flights_analytic_file;
     class Origin;
     var DepDelay;
@@ -92,8 +90,6 @@ proc print noobs data=temp(obs=3);
     id Origin;
     var DepDelay;
 run;
-
-
 
 
 /* 
@@ -112,10 +108,6 @@ so that the means computed is more accurate.
 *******************************************************************************;
 */
 
-
 proc freq data=flights_analytic_file;
     table Cancelled*UniqueCarrier;
 run;
-
-
-
