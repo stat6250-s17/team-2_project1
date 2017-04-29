@@ -54,7 +54,9 @@ condition
 */ 
 
 
-proc contents data=Delay15 varnum;
+proc contents 
+        data=Delay15 varnum
+        ;
 run;
 
 title;
@@ -84,10 +86,18 @@ so that the means computed is more accurate.
 *******************************************************************************;
 */
 
-proc print noobs data=temp(obs=3);
-    id Origin;
-    var DepDelay;
+proc print 
+        noobs
+        data=temp(obs=3)
+    ;
+    id 
+        Origin
+    ;
+    var 
+        DepDelay
+    ;
 run;
+
 
 title;
 footnote;
@@ -117,8 +127,12 @@ so that the means computed is more accurate.
 *******************************************************************************;
 */
 
-proc freq data=flights_analytic_file;
-    table Cancelled*UniqueCarrier;
+proc freq 
+        data=flights_analytic_file
+    ;
+    table 
+            Cancelled*UniqueCarrier
+    ;
 run;
 
 title;
