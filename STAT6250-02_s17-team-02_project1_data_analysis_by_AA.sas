@@ -23,6 +23,10 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,
 * load external file that generates analytic dataset FRPM1516_analytic_file;
 %include '.\STAT6250-02_s17-team-02_project1_data_preparation.sas';
 
+
+
+
+
 title1
 'Research Question: What is the number of delayed departure flights arrived within 15 minutes of the scheduled arrival time?'
 ;
@@ -55,12 +59,17 @@ condition
 
 
 proc contents 
-        data=Delay15 varnum
-        ;
+    data=Delay15 varnum
+    ;
 run;
 
 title;
 footnote;
+
+
+
+
+
 
 
 title1
@@ -87,7 +96,7 @@ so that the means computed is more accurate.
 */
 
 proc print 
-        noobs
+    noobs
         data=temp(obs=3)
     ;
     id 
@@ -101,6 +110,9 @@ run;
 
 title;
 footnote;
+
+
+
 
 
 
@@ -131,7 +143,7 @@ proc freq
         data=flights_analytic_file
     ;
     table 
-            Cancelled*UniqueCarrier
+        Cancelled*UniqueCarrier
     ;
 run;
 
