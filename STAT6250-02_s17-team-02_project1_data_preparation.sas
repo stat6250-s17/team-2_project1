@@ -95,3 +95,32 @@ data flights_analytic_file;
     ;
     set flights_raw;
 run;
+
+
+*
+Use Where to create a subset data that meets our criteria "arrived
+within 15 minutes of the scheduled arrival time".
+;
+
+data Delay15;
+    set flights_analytic_file;
+    where ArrDelay<15;
+run;
+
+*
+Use PROC MEANS to compute the mean of DepDelay for each Origin 
+"Departure Airports", and output the results to a temportatry dataset "temp".
+Use PROC SORT extract and sort just the means the temporary dateset
+;
+
+proc means data=flights_analytic_file;
+    class Origin;
+    var DepDelay;
+    output out=temp;
+run;
+
+proc sort data=temp (where=(_STAT_="MEAN"));
+    by descending DepDelay;
+run;
+
+
