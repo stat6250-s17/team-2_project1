@@ -32,9 +32,8 @@ minutes of the scheduled arrival time?
 Rationale: To identify the number of flight that made an acceptable delay
 (arrived within 15 min. of the scheduled time)
 
-Methodology: Use Where to create a subset data that meets our criteria "arrived
-within 15 minutes of the scheduled arrival time". Then, by using PROC CONTENTS 
-to get then number of observation on the subset dataset.
+Methodology: using PROC CONTENTS to get then number of observation on the 
+subset dataset Delay15.
 
 Limitations: it will be helpful to know the precentage of flights that meets our
 condition because the presentage tells more than the number by it self. Also,
@@ -48,11 +47,6 @@ condition
 */ 
 
 
-data Delay15;
-    set flights_analytic_file;
-    where ArrDelay<15;
-run;
-
 proc contents data=Delay15 varnum;
 run;
 
@@ -64,10 +58,8 @@ worst performance?
 (Rationale: To identify the 3 airports that have the highest frequency of 
 delayed flights)
 
-Methodology: Use PROC MEANS to compute the mean of DepDelay for each Origin 
-"Departure Airports", and output the results to a temportatry dataset "temp".
-Use PROC SORT extract and sort just the means the temporary dateset, and use
-PROC PRINT to print just the first 3 observations from the temporary dataset.
+Methodology: Use PROC PRINT to print just the first 3 observations from the 
+temporary dataset.
 
 Limitations: This methodology does not account for Origion with missing data.
 
@@ -75,16 +67,6 @@ Possible Follow-up Steps: checking the number of missing values in DepDelay
 so that the means computed is more accurate.
 *******************************************************************************;
 */
-
-proc means data=flights_analytic_file;
-    class Origin;
-    var DepDelay;
-    output out=temp;
-run;
-
-proc sort data=temp (where=(_STAT_="MEAN"));
-    by descending DepDelay;
-run;
 
 proc print noobs data=temp(obs=3);
     id Origin;
