@@ -23,14 +23,15 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,
 * load external file that generates analytic dataset FRPM1516_analytic_file;
 %include '.\STAT6250-02_s17-team-02_project1_data_preparation.sas';
 
+title1
+'Research Question: What is the number of delayed departure flights arrived within 15 minutes of the scheduled arrival time?'
+;
+
+title2
+'Rationale: To identify the number of flight that made an acceptable delay (arrived within 15 min. of the scheduled time)'
+;
+
 /*
-*******************************************************************************;
-
-Question 1:  what is the number of delayed departure flights arrived within 15 
-minutes of the scheduled arrival time? 
-
-Rationale: To identify the number of flight that made an acceptable delay
-(arrived within 15 min. of the scheduled time)
 
 Methodology: using PROC CONTENTS to get then number of observation on the 
 subset dataset Delay15.
@@ -50,13 +51,18 @@ condition
 proc contents data=Delay15 varnum;
 run;
 
+
+
+title1
+'Research Question: Considering delayed departure time, which three airports have the worst performance?'
+;
+
+title2
+'Rationale: To identify the 3 airports that have the highest frequency of delayed flights)'
+;
+
 /*
 *******************************************************************************;
-Question 2: Considering delayed departure time, which three airports have the
-worst performance? 
-
-(Rationale: To identify the 3 airports that have the highest frequency of 
-delayed flights)
 
 Methodology: Use PROC PRINT to print just the first 3 observations from the 
 temporary dataset.
@@ -73,14 +79,16 @@ proc print noobs data=temp(obs=3);
     var DepDelay;
 run;
 
+title1
+'Research Question: What is the percentage of the delayed flights were cancelled per carrier?'
+;
+
+title2
+'Rationale: To identify the frequency of cancelled flights per carrier)'
+;
 
 /* 
 *******************************************************************************;
-Question 3: what percentage of the delayed flights were cancelled per carrier? 
-(Rationale: To identify the frequency of cancelled flights per carrier)
-
-Methodology: Using PROC FREQ to create a table of frequency for cancelled 
-flights per carrier.
 
 Limitations: This methodology does not account for missing data.
 
