@@ -23,26 +23,26 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 
 
 title1
-'Research Question: What is the average delay flight for each carrier?'
+'Research Question: What is the average flight delay time for each carrier?'
 ;
 
 title2
-'Rationale: We want to know which carriers are better and have the lowest.'
-delay flight time.
+'Rationale: We want to know which carriers are better and have the lowest
+flight delay time.'
 ;
 
 footnote1
-'Based on the above output, Messa Airline Inc. (YV) has the longest delay on
- average which is 55.29 minutes.'
+'Based on the above output, Messa Airline Inc. (YV) has the longest flight delay
+time on average which is 55.29 minutes.'
 ;
 
 footnote2
-'Frontier Airlines has the lowest delay time which is 27.92 minutes.'
+'Frontier Airlines has the lowest flight delay time which is 27.92 minutes.'
 ;
 
 footnote3
 'It would be interesting to look at the flight ticket cost to help with the
- question which airline is better but we do not have the access to those data.'' 
+ question which airline is better but we do not have the access to those data.' 
 ;
 
 
@@ -76,27 +76,27 @@ run;
 
 
 title1
-'Research Question: What is the average delay correspoding to the month of 
+'Research Question: What is the average flight delay time correspoding to the month of 
 the year?'
 ;
 
 title2
-'Rational: We want to know which months tend to have higher delay time for
-air carriers so we can avoid traveling during those months.'
+'Rational: We want to know which months tend to have higher delay time 
+so we can avoid traveling during those months.'
 ;
 
 footnote1
-'October seems to be the month that has the lowest delay time which is about
- 31.39 minutes on average'
+'October seems to be the month that has the lowest flight delay time which is about
+ 31.39 minutes on average.'
 ;
 
 
 footnote2
-'December has the highest delay time which is about 49.48 minutes on average'
+'December has the highest flight delay time which is about 49.48 minutes on average.'
 ;
 
 footnote3
-'So the best month to travel with the lowest delay time is October. It would
+'So the best month to travel with the lowest flight delay time is October. It would
  be interesting to look a bit deeper at the months across all the carriers.'
 ;
 
@@ -130,7 +130,7 @@ run;
 
 
 title1
-'Research Question: Which months correlate to the weather delay the most?'
+'Research Question: Which months correlate to the weather delay?'
 ;
 
 title2
@@ -139,12 +139,12 @@ so we can avoid travelling during those months.'
 ;
 
 footnote1
-'October seems to be the month that has the lowest delay time due to weather
+'October seems to be the month that has the lowest flight delay time due to weather
  condition.'
 ;
 
 footnote2
-'December seems to be the month that has the highest delay time due to weather
+'December seems to be the month that has the highest flight delay time due to weather
  condition.'
 ;
 
@@ -154,7 +154,7 @@ footnote3
 
 footnote4
 'It would be interesting to see how flight delay due to weather condition contributes
- to the total delay time.'
+ to the total flight delay time.'
 ;
 
 *
