@@ -1,7 +1,7 @@
-***************************************************************************************************;
-***************************************************************************************************;
-* (set window width to banner width to calibrate line length to 100 characters *;
-***************************************************************************************************;
+*******************************************************************************;
+*******************************************************************************;
+* (set window width to banner width to calibrate line length to 80 characters *;
+*******************************************************************************;
 *
 This file uses the following analytic dataset to address several research
 questions regarding flight delay in US airports
@@ -19,43 +19,43 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,
 * load external file that generates analytic dataset FRPM1516_analytic_file;
 %include '.\STAT6250-02_s17-team-02_project1_data_preparation.sas';
 
+title1
+'Research Question: What is the average flight delay due to weather for each carrier?'
+;
+
+title2
+'Rationale: We want to know which carriers are better and have the lowest
+ delay due to weather based on flight time.'
+;
+
+footnote1
+'Based on the above output, Aloha Airlines Inc. (AQ) has the longest delay on
+ average which is 58.9 minutes.'
+;
+
+footnote2
+'SkyWest Airlines has the second longest delay time which is 38.83 minutes.'
+;
+
+footnote3
+'It would be interesting to look at the weather data and delay due to weather to
+ question which airline is better but we do not have the access to those data.' 
+;
+
 /*
-...................................................................................................
-Question 1:  What is the average weather delay of each carrier?
-Rationale: To identify the top 10 carriers which are most impacted due to weather condition?
-Methodology: Using KEEP and IF Command we have only selected required variables and removed all 
-			records which are not delayed using weather.
-			We have created new temp data set to change the data type from character to numeric to 
-			do statistical analysis. Use PROC MEAN to compute the mean of weather delay and store 
-			the result in temporary dataset. Used PROC SORT to sort the temporary dataset.
-...................................................................................................
-*/ 
+*******************************************************************************;
+Methodology: Use PROC PRINT to print just the first ten observations from
+ the temporary dataset created in the corresponding data-prep file.
+
+Limitations: This dataset has only data for year 2013.  
+
+Possible Follow-up Steps: Missing values are already excluded in data-prep 
+ file. We can increase the number of years by laoding all data in github rep-
+ -ository but maintaing same file struture.
+*******************************************************************************;
+*/
 
 
-
-DATA flights_analytics_q1;
-    SET  flights_analytic_file;
-    KEEP UniqueCarrier WeatherDelay;
-    IF WeatherDelay not in ('0','NA') ;
-RUN;
-
-data flights_analytics_q1_temp;
-	SET flights_analytics_q1;
-	UniqueCarrier = UniqueCarrier;
-	newWeatherDelay = input(WeatherDelay,best4.);
-	drop WeatherDelay; 
-    rename newWeatherDelay=WeatherDelay;
-run;
-
-proc means mean noprint data=flights_analytics_q1_temp;
-    class UniqueCarrier;
-    var WeatherDelay;
-    output out=flights_analytic_file_temp;
-run;
-
-proc sort data=flights_analytic_file_temp(where=(_STAT_="MEAN"));
-    by descending WeatherDelay;
-run;
 
 proc print noobs data=flights_analytic_file_temp(obs=10);
     id UniqueCarrier;
@@ -63,42 +63,51 @@ proc print noobs data=flights_analytic_file_temp(obs=10);
 	title 'Top Ten Carrier Worst Affected by Weather Condition'; 
 run;
 
+ title;
+ footnote;
+
+
+
+
+
+title1
+'Research Question: What is the average flight delay due to weather for each Origin Airport?'
+;
+
+title2
+'Rationale: We want to know which origin airport are most impacted due to weather delay .'
+;
+
+footnote1
+'Based on the above output, Rock Springs Airport, WY: Rock Springs Sweetwater County(RKS) has 
+the longest delay on average which is 86 minutes.'
+;
+
+footnote2
+'Oxnard/Ventura Aipport, CA: Oxnard has the second longest delay time which is 77 minutes.'
+;
+
+footnote3
+'It would be interesting to look at the location data and their weather data and delay due 
+to weather to question which airport is better but we do not have the access to those data.' 
+;
+
 /*
-...................................................................................................
-Question 2:  What is the average weather delay of each airport?
-Rationale: To identify the top 10 airports which are most impacted due to weather condition?
-Methodology: Using KEEP and IF Command we have only selected required variables and removed all 
-			records which are not delayed using weather.
-			We have created new temp data set to change the data type from character to numeric to 
-			do statistical analysis. Use PROC MEAN to compute the mean of weather delay and store 
-			the result in temporary dataset. Used PROC SORT to sort the temporary dataset.
-...................................................................................................
-*/ 
+*******************************************************************************;
+Methodology: Use PROC PRINT to print just the first ten observations from
+ the temporary dataset created in the corresponding data-prep file.
+
+Limitations: This dataset has limited to one year data.
+
+Possible Follow-up Steps: Missing values of WetherDelay are already excluded in 
+ data-prep file. We can increase the number of years by laoding all data in github 
+ repository but maintaing same file struture.
+*******************************************************************************;
+*/
 
 
 
-DATA flights_analytics_weather;
-    SET  flights_analytic_file;
-    KEEP Origin WeatherDelay;
-    IF WeatherDelay not in ('0','NA') ;
-RUN;
 
-data flights_analytics_weather_2;
-	SET flights_analytics_weather;
-	Origin = Origin;
-	newWeatherDelay = input(WeatherDelay,best4.);
-	drop WeatherDelay; 
-    rename newWeatherDelay=WeatherDelay;
-run;
-
-proc means mean noprint data=flights_analytics_weather_2;
-    class Origin;
-    var WeatherDelay;
-    output out=flights_analytic_file_temp;
-run;
-proc sort data=flights_analytic_file_temp(where=(_STAT_="MEAN"));
-    by  descending WeatherDelay;
-run;
 
 proc print noobs data=flights_analytic_file_temp(obs=10);
     id Origin;
@@ -106,26 +115,40 @@ proc print noobs data=flights_analytic_file_temp(obs=10);
 	title 'Top Ten Airport Worst Affected by Weather Condition'; 
 run;
 
+ title;
+ footnote;
+ 
+ 
+ 
+ 
+
+title1
+'Research Question: What is the percentage of the diverted flights  per carrier?'
+;
+
+title2
+'Rationale: To identify the frequency of diverted flights per carrier'
+;
+
+footnote1 
+'The table above shows the frequency and the precentage of diverted flights for each 
+ carrier based on the total number of diverted flights'
+;
 
 
-/*
-...................................................................................................
-Question 3:  What is the percentage diverted flights of each carrier?
-Rationale: To identify the carriers which flights are diverted most of the time?
-Methodology: Using PROC SORT commands sort the data set. Using PROC FREQ command percentage of 
-			diverted flights will be shown. 
-...................................................................................................
-*/ 
+/* 
+*******************************************************************************;
+Methodology: Using PROC FREQ command percentage of diverted flights will be shown
+from sorted dataset
+ 
+Limitations: This methodology does not account for missing data nor the number
+of total flights per carrier .
 
-PROC SORT Data=flights_analytic_file Out=flights_analytic_file_sorted;
- BY UniqueCarrier;
-RUN; 
+Possible Follow-up Steps: checking the Cancelled variable for any missing data 
+so that the means computed is more accurate.
+*******************************************************************************;
+*/
 
-PROC FORMAT;
-VALUE Diverted_Fmt
- Low-0=Not Diverted
- 0-1=Diverted;
- RUN; 
 
 PROC FREQ DATA = flights_analytic_file_sorted;
     TABLES Diverted*UniqueCarrier;
@@ -134,3 +157,7 @@ PROC FREQ DATA = flights_analytic_file_sorted;
           Diverted=Flight Dieverted Status;
 	BY UniqueCarrier;
 RUN;
+
+
+ title;
+ footnote;

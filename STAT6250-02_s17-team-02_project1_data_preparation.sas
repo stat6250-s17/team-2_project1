@@ -123,4 +123,95 @@ proc sort data=temp (where=(_STAT_="MEAN"));
     by descending DepDelay;
 run;
 
+*
+Use DATA statement to create new weather dataset flights_analytics_q1 having
+only required field UniqueCarrier and WeatherDelay to analyze the weather 
+delay impact on each Origin Airport by excluding the records where there is 
+no delay due to weather.
+Create new temporary dataset flights_analytics_q1_temp to change the datatype 
+of WeatherDelay from string to numeric to be ready for statistics procedures.
+Use PROC MEANS to compute the mean of WeatherDelay for each Airline, and 
+output the results to a temporary dataset "flights_analytic_file_temp".
+Use PROC SORT extract and sort just the means the temporary dataset.
+;
 
+DATA flights_analytics_q1;
+    SET  flights_analytic_file;
+    KEEP UniqueCarrier WeatherDelay;
+    IF WeatherDelay not in ('0','NA') ;
+RUN;
+
+data flights_analytics_q1_temp;
+	SET flights_analytics_q1;
+	UniqueCarrier = UniqueCarrier;
+	newWeatherDelay = input(WeatherDelay,best4.);
+	drop WeatherDelay; 
+    rename newWeatherDelay=WeatherDelay;
+run;
+
+
+proc means mean noprint data=flights_analytics_q1_temp;
+    class UniqueCarrier;
+    var WeatherDelay;
+    output out=flights_analytic_file_temp;
+run;
+
+proc sort data=flights_analytic_file_temp(where=(_STAT_="MEAN"));
+    by descending WeatherDelay;
+run;
+
+
+*
+Use DATA statement to create new weather dataset flights_analytics_weather having
+only required field Origin and WeatherDelay to analyze the weather delay impact 
+on each Origin Airport by excluding the records where there is no delay due to 
+weather.
+Create new temporary dataset flights_analytics_weather_2 to change the datatype 
+of WeatherDelay from string to numeric to be ready for statistics procedures.
+Use PROC MEANS to compute the mean of WeatherDelay for each Origin Airport, and 
+output the results to a temporary dataset "flights_analytic_file_temp".
+Use PROC SORT extract and sort just the means the temporary dataset.
+;
+
+
+DATA flights_analytics_weather;
+    SET  flights_analytic_file;
+    KEEP Origin WeatherDelay;
+    IF WeatherDelay not in ('0','NA') ;
+RUN;
+
+data flights_analytics_weather_2;
+	SET flights_analytics_weather;
+	Origin = Origin;
+	newWeatherDelay = input(WeatherDelay,best4.);
+	drop WeatherDelay; 
+    rename newWeatherDelay=WeatherDelay;
+run;
+
+proc means mean noprint data=flights_analytics_weather_2;
+    class Origin;
+    var WeatherDelay;
+    output out=flights_analytic_file_temp;
+run;
+proc sort data=flights_analytic_file_temp(where=(_STAT_="MEAN"));
+    by  descending WeatherDelay;
+run;
+
+*
+Use PROC SORT to sort the flights_analytic_file datset by Unique Airline Code and 
+save sorted dataset as flights_analytic_file_sorted.
+;
+
+
+PROC SORT Data=flights_analytic_file Out=flights_analytic_file_sorted;
+ BY UniqueCarrier;
+RUN; 
+
+
+* create output formats;
+
+PROC FORMAT;
+VALUE Diverted_Fmt
+ Low-0=Not Diverted
+ 0-1=Diverted;
+ RUN; 
