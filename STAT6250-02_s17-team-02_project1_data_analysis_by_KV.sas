@@ -73,6 +73,8 @@ proc print noobs data=flights_analytic_file_temp(obs=20);
     id UniqueCarrier;
     var ArrDelay;
 run;
+title;
+footnote;
 
 
 title1
@@ -127,6 +129,8 @@ proc print noobs data=flights_analytic_file_temp(obs=20);
     id Month;
     var ArrDelay;
 run;
+title;
+footnote;
 
 
 title1
@@ -184,3 +188,5 @@ proc print noobs data=flights_analytic_file_temp(obs=20);
     id Month;
     var WeatherDelay;
 run;
+title;
+footnote;
