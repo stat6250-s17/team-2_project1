@@ -44,8 +44,17 @@ run;
 filename tempfile clear;
 
 * check raw flights dataset for duplicates with respect to its composite key;
-proc sort nodupkey data=flights_raw dupout=flights_raw_dups out=_null_;
-    by Month DayofMonth FlightNum;
+proc sort 
+	nodupkey 
+	data=flights_raw 
+	dupout=flights_raw_dups 
+	out=_null_
+   ;
+   by
+        Month
+        DayofMonth
+        FlightNum
+   ;
 run;
 
 * build analytic dataset from flights dataset with the least number of columns
@@ -122,6 +131,8 @@ run;
 proc sort data=temp (where=(_STAT_="MEAN"));
     by descending DepDelay;
 run;
+
+
 
 *
 Use DATA statement to create new weather dataset flights_analytics_q1 having
