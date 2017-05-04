@@ -185,11 +185,11 @@ Use PROC SORT extract and sort just the means the temporary dataset.
 ;
 
 
-DATA flights_analytics_weather;
-    SET  flights_analytic_file;
-    KEEP Origin WeatherDelay;
-    IF WeatherDelay not in ('0','NA') ;
-RUN;
+data flights_analytics_weather;
+    set  flights_analytic_file;
+    keep Origin WeatherDelay;
+    if WeatherDelay not in ('0','NA') ;
+run;
 
 data flights_analytics_weather_2;
 	SET flights_analytics_weather;
@@ -214,15 +214,15 @@ save sorted dataset as flights_analytic_file_sorted.
 ;
 
 
-PROC SORT Data=flights_analytic_file Out=flights_analytic_file_sorted;
- BY UniqueCarrier;
-RUN; 
+proc sort Data=flights_analytic_file Out=flights_analytic_file_sorted;
+	by UniqueCarrier;
+run; 
 
 
 * create output formats;
 
-PROC FORMAT;
-VALUE Diverted_Fmt
- Low-0=Not Diverted
- 0-1=Diverted;
- RUN; 
+proc FORMAT;
+	value Diverted_Fmt
+	Low-0=Not Diverted
+	0-1=Diverted;
+run; 
