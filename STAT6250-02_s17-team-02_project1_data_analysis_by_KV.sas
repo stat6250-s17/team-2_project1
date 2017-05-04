@@ -139,8 +139,7 @@ footnote1
 ;
 
 footnote2
-'December seems to be the month that has the highest flight delay time due to weather
- condition.'
+'December seems to be the month that has the highest flight delay time due to weather condition.'
 ;
 
 footnote3
