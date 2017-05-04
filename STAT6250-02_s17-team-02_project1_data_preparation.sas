@@ -146,11 +146,11 @@ output the results to a temporary dataset "flights_analytic_file_temp".
 Use PROC SORT extract and sort just the means the temporary dataset.
 ;
 
-DATA flights_analytics_q1;
-    SET  flights_analytic_file;
-    KEEP UniqueCarrier WeatherDelay;
-    IF WeatherDelay not in ('0','NA') ;
-RUN;
+data flights_analytics_q1;
+    set  flights_analytic_file;
+    keep UniqueCarrier WeatherDelay;
+    if WeatherDelay not in ('0','NA') ;
+run;
 
 data flights_analytics_q1_temp;
 	SET flights_analytics_q1;
