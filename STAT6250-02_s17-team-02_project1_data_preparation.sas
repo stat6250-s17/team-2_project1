@@ -61,47 +61,47 @@ and minimal cleaning/transformation needed to address research questions in
 corresponding data-analysis files;
 
 data flights_analytic_file;
-    retain
-       Year
-       Month
-       DayofMonth
-       UniqueCarrier
-       ArrDelay
-       DepDelay
-       Origin
-       Cancelled
-       FlightNum
-       Distance
-       ArrTime
-       CRSArrTime
-       DepDelay
-       Diverted
-       WeatherDelay
-       NASDelay
-       SecurityDelay
-       LateAircraftDelay
-    ;
-    keep
-       Year
-       Month
-       DayofMonth
-       UniqueCarrier
-       ArrDelay
-       DepDelay
-       Origin
-       Cancelled
-       FlightNum
-       Distance
-       ArrTime
-       CRSArrTime
-       DepDelay
-       Diverted
-       WeatherDelay
-       NASDelay
-       SecurityDelay
-       LateAircraftDelay
-    ;
-    set flights_raw;
+	retain
+		Year
+		Month
+		DayofMonth
+		UniqueCarrier
+		ArrDelay
+		DepDelay
+		Origin
+		Cancelled
+		FlightNum
+		Distance
+		ArrTime
+		CRSArrTime
+		DepDelay
+		Diverted
+		WeatherDelay
+		NASDelay
+		SecurityDelay
+		LateAircraftDelay
+		;
+	keep
+		Year
+		Month
+		DayofMonth
+		UniqueCarrier
+		ArrDelay
+		DepDelay
+		Origin
+		Cancelled
+		FlightNum
+		Distance
+		ArrTime
+		CRSArrTime
+		DepDelay
+		Diverted
+		WeatherDelay
+		NASDelay
+		SecurityDelay
+		LateAircraftDelay
+		;
+	set flights_raw;
 run;
 
 
@@ -111,8 +111,8 @@ within 15 minutes of the scheduled arrival time".
 ;
 
 data Delay15;
-    set flights_analytic_file;
-    where ArrDelay<15;
+	set flights_analytic_file;
+	where ArrDelay<15;
 run;
 
 *
@@ -122,13 +122,13 @@ Use PROC SORT extract and sort just the means the temporary dateset
 ;
 
 proc means data=flights_analytic_file;
-    class Origin;
-    var DepDelay;
-    output out=temp;
+	class Origin;
+	var DepDelay;
+	output out=temp;
 run;
 
 proc sort data=temp (where=(_STAT_="MEAN"));
-    by descending DepDelay;
+	by descending DepDelay;
 run;
 
 
@@ -146,9 +146,9 @@ Use PROC SORT extract and sort just the means the temporary dataset.
 ;
 
 data flights_analytics_q1;
-    set  flights_analytic_file;
-    keep UniqueCarrier WeatherDelay;
-    if WeatherDelay not in ('0','NA') ;
+	set  flights_analytic_file;
+	keep UniqueCarrier WeatherDelay;
+	if WeatherDelay not in ('0','NA');
 run;
 
 data flights_analytics_q1_temp;
@@ -161,13 +161,13 @@ run;
 
 
 proc means mean noprint data=flights_analytics_q1_temp;
-    class UniqueCarrier;
-    var WeatherDelay;
-    output out=flights_analytic_file_temp;
+	class UniqueCarrier;
+	var WeatherDelay;
+	output out=flights_analytic_file_temp;
 run;
 
 proc sort data=flights_analytic_file_temp(where=(_STAT_="MEAN"));
-    by descending WeatherDelay;
+	by descending WeatherDelay;
 run;
 
 
