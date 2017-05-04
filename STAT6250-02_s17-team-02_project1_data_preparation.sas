@@ -24,22 +24,21 @@ FlightNum, Year, Month and DayofMonth .
 
 
 * setup environmental parameters;
-%let inputDatasetURL =
-https://github.com/stat6250/team-2_project1/blob/master/DelayedFlight.csv?raw=true;
+%let inputDatasetURL = https://github.com/stat6250/team-2_project1/blob/master/DelayedFlight.csv?raw=true;
 
 
 * load raw Flights dataset over the wire;
 filename tempfile TEMP;
-proc http
-    method="get"
-    url="&inputDatasetURL."
-    out=tempfile
-    ;
+	proc http
+	method="get"
+	url="&inputDatasetURL."
+	out=tempfile
+	;
 run;
-proc import
-    file=tempfile
-    out=flights_raw
-    dbms=csv;
+	proc import
+	file=tempfile
+	out=flights_raw
+	dbms=csv;
 run;
 filename tempfile clear;
 
@@ -153,7 +152,7 @@ data flights_analytics_q1;
 run;
 
 data flights_analytics_q1_temp;
-	SET flights_analytics_q1;
+	set flights_analytics_q1;
 	UniqueCarrier = UniqueCarrier;
 	newWeatherDelay = input(WeatherDelay,best4.);
 	drop WeatherDelay; 
@@ -186,13 +185,13 @@ Use PROC SORT extract and sort just the means the temporary dataset.
 
 
 data flights_analytics_weather;
-    set  flights_analytic_file;
-    keep Origin WeatherDelay;
-    if WeatherDelay not in ('0','NA') ;
+	set flights_analytic_file;
+	keep Origin WeatherDelay;
+	if WeatherDelay not in ('0','NA') ;
 run;
 
 data flights_analytics_weather_2;
-	SET flights_analytics_weather;
+	set flights_analytics_weather;
 	Origin = Origin;
 	newWeatherDelay = input(WeatherDelay,best4.);
 	drop WeatherDelay; 
@@ -200,12 +199,12 @@ data flights_analytics_weather_2;
 run;
 
 proc means mean noprint data=flights_analytics_weather_2;
-    class Origin;
-    var WeatherDelay;
-    output out=flights_analytic_file_temp;
+	class Origin;
+	var WeatherDelay;
+	output out=flights_analytic_file_temp;
 run;
 proc sort data=flights_analytic_file_temp(where=(_STAT_="MEAN"));
-    by  descending WeatherDelay;
+	by descending WeatherDelay;
 run;
 
 *
@@ -221,7 +220,7 @@ run;
 
 * create output formats;
 
-proc FORMAT;
+proc format;
 	value Diverted_Fmt
 	Low-0=Not Diverted
 	0-1=Diverted;
