@@ -9,14 +9,14 @@ questions regarding delayed flight for a bunch of carriers.
 Dataset Name: DelayedFlight created in external file
 STAT6250-02_s17-team-2_project1_data_preparation.sas, which is assumed to be
 in the same directory as this file
+
 See included file for dataset properties
 ;
 
 * environmental setup;
 
 * set relative file import path to current directory (using standard SAS trick;
-X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))
--%length(%sysget(SAS_EXECFILENAME))))""";
+X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";
 
 * load external file that generates analytic dataset FRPM1516_analytic_file;
 %include '.\STAT6250-02_s17-team-02_project1_data_preparation.sas';
@@ -27,13 +27,11 @@ title1
 ;
 
 title2
-'Rationale: We want to know which carriers are better and have the lowest
-flight delay time.'
+'Rationale: We want to know which carriers are better and have the lowest flight delay time.'
 ;
 
 footnote1
-'Based on the above output, Messa Airline Inc. (YV) has the longest flight delay
-time on average which is 55.29 minutes.'
+'Based on the above output, Messa Airline Inc. (YV) has the longest flight delay time on average which is 55.29 minutes.'
 ;
 
 footnote2
@@ -41,8 +39,7 @@ footnote2
 ;
 
 footnote3
-'It would be interesting to look at the flight ticket cost to help with the
- question which airline is better but we do not have the access to those data.' 
+'It would be interesting to look at the flight ticket cost to help with the question which airline is better but we do not have the access to those data.' 
 ;
 
 
@@ -78,18 +75,15 @@ footnote;
 
 
 title1
-'Research Question: What is the average flight delay time correspoding to the month of 
-the year?'
+'Research Question: What is the average flight delay time correspoding to the month of the year?'
 ;
 
 title2
-'Rational: We want to know which months tend to have higher delay time 
-so we can avoid traveling during those months.'
+'Rational: We want to know which months tend to have higher delay time so we can avoid traveling during those months.'
 ;
 
 footnote1
-'October seems to be the month that has the lowest flight delay time which is about
- 31.39 minutes on average.'
+'October seems to be the month that has the lowest flight delay time which is about 31.39 minutes on average.'
 ;
 
 
@@ -98,8 +92,7 @@ footnote2
 ;
 
 footnote3
-'So the best month to travel with the lowest flight delay time is October. It would
- be interesting to look a bit deeper at the months across all the carriers.'
+'So the best month to travel with the lowest flight delay time is October. It would be interesting to look a bit deeper at the months across all the carriers.'
 ;
 
 *
@@ -138,13 +131,11 @@ title1
 ;
 
 title2
-'Rationale: We want to know which months tend to have weather delay when flying 
-so we can avoid travelling during those months.'
+'Rationale: We want to know which months tend to have weather delay when flying so we can avoid travelling during those months.'
 ;
 
 footnote1
-'October seems to be the month that has the lowest flight delay time due to weather
- condition.'
+'October seems to be the month that has the lowest flight delay time due to weather condition.'
 ;
 
 footnote2
@@ -157,8 +148,7 @@ footnote3
 ;
 
 footnote4
-'It would be interesting to see how flight delay due to weather condition contributes
- to the total flight delay time.'
+'It would be interesting to see how flight delay due to weather condition contributes to the total flight delay time.'
 ;
 
 *
