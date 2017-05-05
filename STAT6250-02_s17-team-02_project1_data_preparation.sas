@@ -21,6 +21,14 @@ from Jan to March 2008)*
 FlightNum, Year, Month and DayofMonth .
 ;
 
+* create output formats;
+
+proc format;
+	value Diverted_Fmt
+		Low-0=Not Diverted
+		0-1=Diverted
+	;
+run; 
 
 
 * setup environmental parameters;
@@ -127,10 +135,15 @@ proc means data=flights_analytic_file;
 	output out=temp;
 run;
 
-proc sort data=temp (where=(_STAT_="MEAN"));
-	by descending DepDelay;
-run;
 
+proc sort 
+	nodupkey 
+	data=temp (where=(_STAT_="MEAN")
+   ;
+   by
+        descending DepDelay
+   ;
+run;
 
 
 *
@@ -160,16 +173,31 @@ data flights_analytics_q1_temp;
 run;
 
 
-proc means mean noprint data=flights_analytics_q1_temp;
-	class UniqueCarrier;
-	var WeatherDelay;
-	output out=flights_analytic_file_temp;
+proc means 
+	mean noprint 
+	data=flights_analytics_q1_temp
+	;
+	class 
+	   UniqueCarrier
+	;
+	var 
+	    WeatherDelay
+	;
+	output 
+	    out=flights_analytic_file_temp
+	;
 run;
 
-proc sort data=flights_analytic_file_temp(where=(_STAT_="MEAN"));
-	by descending WeatherDelay;
-run;
 
+
+proc sort 
+	nodupkey 
+	data=flights_analytic_file_temp(where=(_STAT_="MEAN")) 
+   ;
+   by
+        descending WeatherDelay
+   ;
+run;
 
 *
 Use DATA statement to create new weather dataset flights_analytics_weather having
@@ -198,13 +226,30 @@ data flights_analytics_weather_2;
     rename newWeatherDelay=WeatherDelay;
 run;
 
-proc means mean noprint data=flights_analytics_weather_2;
-	class Origin;
-	var WeatherDelay;
-	output out=flights_analytic_file_temp;
+
+
+proc means 
+	mean noprint 
+	data=flights_analytics_weather_2
+	;
+	class 
+	   Origin
+	;
+	var 
+	    WeatherDelay
+	;
+	output 
+	    out=flights_analytic_file_temp
+	;
 run;
-proc sort data=flights_analytic_file_temp(where=(_STAT_="MEAN"));
-	by descending WeatherDelay;
+
+proc sort 
+	nodupkey 
+	data=flights_analytic_file_temp(where=(_STAT_="MEAN"))
+   ;
+   by
+        descending WeatherDelay
+   ;
 run;
 
 *
@@ -213,15 +258,13 @@ save sorted dataset as flights_analytic_file_sorted.
 ;
 
 
-proc sort Data=flights_analytic_file Out=flights_analytic_file_sorted;
-	by UniqueCarrier;
-run; 
 
-
-* create output formats;
-
-proc format;
-	value Diverted_Fmt
-	Low-0=Not Diverted
-	0-1=Diverted;
-run; 
+proc sort 
+	nodupkey 
+	data=flights_analytic_file 
+	out=flights_analytic_file_sorted
+   ;
+   by
+        UniqueCarrier
+   ;
+run;
