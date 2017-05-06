@@ -2,20 +2,25 @@
 *******************************************************************************;
 * (set window width to banner width to calibrate line length to 80 characters *;
 *******************************************************************************;
+*IL: add line breaks to separate paragraphs in comment blocks;
 *
 This file uses the following analytic dataset to address several research
 questions regarding flight delay in US airports
+
 Dataset Name: DelayedFlight.csv created in external file having three months
 STAT6250-02_s17-team-02_project1_data_preparation.sas, which is assumed to be
 in the same directory as this file
+
 See included file for dataset properties
 ;
 
 * environmental setup;
 
 * set relative file import path to current directory (using standard SAS trick;
-X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,
-%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";
+*IL: don't add line breaks inside string literals;
+X
+"cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))"""
+;
 * load external file that generates analytic dataset FRPM1516_analytic_file;
 %include '.\STAT6250-02_s17-team-02_project1_data_preparation.sas';
 
@@ -24,13 +29,11 @@ title1
 ;
 
 title2
-'Rationale: We want to know which carriers are better and have the lowest
- delay due to weather based on flight time.'
+'Rationale: We want to know which carriers are better and have the lowest delay due to weather based on flight time.'
 ;
 
 footnote1
-'Based on the above output, Aloha Airlines Inc. (AQ) has the longest delay on
- average which is 58.9 minutes.'
+'Based on the above output, Aloha Airlines Inc. (AQ) has the longest delay on average which is 58.9 minutes.'
 ;
 
 footnote2
@@ -38,8 +41,7 @@ footnote2
 ;
 
 footnote3
-'It would be interesting to look at the weather data and delay due to weather to
- question which airline is better but we do not have the access to those data.' 
+'It would be interesting to look at the weather data and delay due to weather to question which airline is better but we do not have the access to those data.' 
 ;
 
 /*
@@ -60,11 +62,12 @@ Possible Follow-up Steps: Missing values are already excluded in data-prep
 proc print noobs data=flights_analytic_file_temp(obs=10);
     id UniqueCarrier;
     var WeatherDelay;
-	title 'Top Ten Carrier Worst Affected by Weather Condition'; 
+    title 'Top Ten Carrier Worst Affected by Weather Condition'; 
 run;
 
- title;
- footnote;
+*IL: be careful with extra spaces;
+title;
+footnote;
 
 
 
@@ -112,7 +115,7 @@ Possible Follow-up Steps: Missing values of WetherDelay are already excluded in
 proc print noobs data=flights_analytic_file_temp(obs=10);
     id Origin;
     var WeatherDelay;
-	title 'Top Ten Airport Worst Affected by Weather Condition'; 
+    title 'Top Ten Airport Worst Affected by Weather Condition'; 
 run;
 
  title;
@@ -149,13 +152,13 @@ so that the means computed is more accurate.
 *******************************************************************************;
 */
 
-
+*IL: be consistent with case;
 PROC FREQ DATA = flights_analytic_file_sorted;
     TABLES Diverted*UniqueCarrier;
-	FORMAT Diverted Diverted_Fmt.; 
-	LABEL UniqueCarrier=Unique Carrier Code of AIrlines 
+    FORMAT Diverted Diverted_Fmt.; 
+    LABEL UniqueCarrier=Unique Carrier Code of AIrlines 
           Diverted=Flight Dieverted Status;
-	BY UniqueCarrier;
+    BY UniqueCarrier;
 RUN;
 
 
