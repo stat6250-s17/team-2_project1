@@ -5,17 +5,20 @@
 *
 This file uses the following analytic dataset to address several research
 questions regarding flight delay in US airports
+
 Dataset Name: DelayedFlight.csv created in external file having three months
 STAT6250-02_s17-team-02_project1_data_preparation.sas, which is assumed to be
 in the same directory as this file
+
 See included file for dataset properties
 ;
 
 * environmental setup;
 
 * set relative file import path to current directory (using standard SAS trick;
-X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,
-%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";
+X 
+"cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))"""
+;
 * load external file that generates analytic dataset FRPM1516_analytic_file;
 %include '.\STAT6250-02_s17-team-02_project1_data_preparation.sas';
 
@@ -57,7 +60,7 @@ Possible Follow-up Steps: Missing values are already excluded in data-prep
 
 
 
-proc print noobs data=flights_analytic_file_temp(obs=10);
+proc print noobs data=flights_analytic_file_temp_q1(obs=10);
     id UniqueCarrier;
     var WeatherDelay;
 	title 'Top Ten Carrier Worst Affected by Weather Condition'; 
@@ -109,7 +112,7 @@ Possible Follow-up Steps: Missing values of WetherDelay are already excluded in
 
 
 
-proc print noobs data=flights_analytic_file_temp(obs=10);
+proc print noobs data=flights_analytic_file_temp_q2(obs=10);
     id Origin;
     var WeatherDelay;
 	title 'Top Ten Airport Worst Affected by Weather Condition'; 
@@ -150,12 +153,12 @@ so that the means computed is more accurate.
 */
 
 
-PROC FREQ DATA = flights_analytic_file_sorted;
-    TABLES Diverted*UniqueCarrier;
-	FORMAT Diverted Diverted_Fmt.; 
-	LABEL UniqueCarrier=Unique Carrier Code of AIrlines 
+proc freq data = flights_analytic_file_sorted;
+    tables Diverted*UniqueCarrier;
+	format Diverted Diverted_Fmt.; 
+	label UniqueCarrier=Unique Carrier Code of AIrlines 
           Diverted=Flight Dieverted Status;
-	BY UniqueCarrier;
+	by UniqueCarrier;
 RUN;
 
 
