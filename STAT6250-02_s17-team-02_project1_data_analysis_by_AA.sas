@@ -26,7 +26,6 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 
 
 
-
 title1
 'Research Question: What is the number of delayed departure flights arrived within 15 minutes of the scheduled arrival time?'
 ;
