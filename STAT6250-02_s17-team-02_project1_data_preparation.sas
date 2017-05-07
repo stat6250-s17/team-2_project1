@@ -37,13 +37,13 @@ run;
 
 * load raw Flights dataset over the wire;
 filename tempfile TEMP;
-	proc http
+proc http
 	method="get"
 	url="&inputDatasetURL."
 	out=tempfile
 	;
 run;
-	proc import
+proc import
 	file=tempfile
 	out=flights_raw
 	dbms=csv;
@@ -138,11 +138,11 @@ run;
 
 proc sort 
 	nodupkey 
-	data=temp (where=(_STAT_="MEAN")
-   ;
-   by
-        descending DepDelay
-   ;
+	data=temp (where=(_STAT_="MEAN"))
+	;
+	by
+	descending DepDelay
+	;
 run;
 
 
@@ -154,7 +154,7 @@ no delay due to weather.
 Create new temporary dataset flights_analytics_q1_temp to change the datatype 
 of WeatherDelay from string to numeric to be ready for statistics procedures.
 Use PROC MEANS to compute the mean of WeatherDelay for each Airline, and 
-output the results to a temporary dataset "flights_analytic_file_temp".
+output the results to a temporary dataset "flights_analytic_file_temp_q1".
 Use PROC SORT extract and sort just the means the temporary dataset.
 ;
 
@@ -184,7 +184,7 @@ proc means
 	    WeatherDelay
 	;
 	output 
-	    out=flights_analytic_file_temp
+	    out=flights_analytic_file_temp_q1
 	;
 run;
 
@@ -192,11 +192,11 @@ run;
 
 proc sort 
 	nodupkey 
-	data=flights_analytic_file_temp(where=(_STAT_="MEAN")) 
-   ;
-   by
-        descending WeatherDelay
-   ;
+	data=flights_analytic_file_temp_q1(where=(_STAT_="MEAN")) 
+	;
+	by
+	descending WeatherDelay
+	;
 run;
 
 *
@@ -207,7 +207,7 @@ weather.
 Create new temporary dataset flights_analytics_weather_2 to change the datatype 
 of WeatherDelay from string to numeric to be ready for statistics procedures.
 Use PROC MEANS to compute the mean of WeatherDelay for each Origin Airport, and 
-output the results to a temporary dataset "flights_analytic_file_temp".
+output the results to a temporary dataset "flights_analytic_file_temp_q2".
 Use PROC SORT extract and sort just the means the temporary dataset.
 ;
 
@@ -239,17 +239,17 @@ proc means
 	    WeatherDelay
 	;
 	output 
-	    out=flights_analytic_file_temp
+	    out=flights_analytic_file_temp_q2
 	;
 run;
 
 proc sort 
 	nodupkey 
-	data=flights_analytic_file_temp(where=(_STAT_="MEAN"))
-   ;
-   by
-        descending WeatherDelay
-   ;
+	data=flights_analytic_file_temp_q2(where=(_STAT_="MEAN"))
+	;
+	by
+	descending WeatherDelay
+	;
 run;
 
 *
@@ -263,8 +263,8 @@ proc sort
 	nodupkey 
 	data=flights_analytic_file 
 	out=flights_analytic_file_sorted
-   ;
-   by
-        UniqueCarrier
-   ;
+	;
+	by
+	UniqueCarrier
+	;
 run;
