@@ -75,107 +75,38 @@ footnote;
 
 
 title1
-'Research Question: What is the average flight delay time correspoding to the month of the year?'
+'Research Question: Number of flight for each carrier?'
 ;
 
 title2
-'Rational: We want to know which months tend to have higher delay time so we can avoid traveling during those months.'
-;
+'Rationale: For investors who want to invest in airline stock, they might want to know which carrier has the most number of flights and which carrier has the lowest number of flights'
 
 footnote1
-'October seems to be the month that has the lowest flight delay time which is about 31.39 minutes on average.'
-;
-
-
-footnote2
-'December has the highest flight delay time which is about 49.48 minutes on average.'
-;
-
-footnote3
-'So the best month to travel with the lowest flight delay time is October. It would be interesting to look a bit deeper at the months across all the carriers.'
-;
-
-*
-Methodology: Use PROC MEANS to compute mean of ArrDelay, and output the 
-results to a temporary dataset. use PROC SORT extract and sort by the month 
-from the temporary dataset.
-
-Limitations: This methodology does not account for missing values for arrive 
-delay time and as well as missing labels for months. 
-
-Possible Follow-up Steps: We can clean the data and convert missing values cell
-to "." so that SAS knows it's a missing value and exclude it from the 
-calculation of Mean. 
-;
-
-proc means mean noprint data=flights_analytic_file;
-    class Month;
-    var ArrDelay;
-    output out=flights_analytic_file_temp;
-run;
-
-proc sort data=flights_analytic_file_temp(where=(_STAT_="MEAN"));
-    by descending ArrDelay;
-run;
-
-proc print noobs data=flights_analytic_file_temp(obs=20);
-    id Month;
-    var ArrDelay;
-run;
-title;
-footnote;
-
-
-title1
-'Research Question: Which months correlate to the weather delay?'
-;
-
-title2
-'Rationale: We want to know which months tend to have weather delay when flying so we can avoid travelling during those months.'
-;
-
-footnote1
-'October seems to be the month that has the lowest flight delay time due to weather condition.'
+'Southwest Airlines Co. (WN)  seems to have the highest number of flight with 114664 flights in three months compared to other carriers.'
 ;
 
 footnote2
-'December seems to be the month that has the highest flight delay time due to weather condition.'
+'Aloha Airlines Inc. (AQ) seems to have the lowest number of flight with only 750 flights in three months compared to other carriers.'
 ;
 
 footnote3
-'So the best month to avoid flight delay due to weather condition is October.'
+'This might not be a good comparison by just looking at the lowest and highest number of flight. We also need to take into the account of how many aircrafs they have and the size of the aircraft and we do not access to those data.'
 ;
 
-footnote4
-'It would be interesting to see how flight delay due to weather condition contributes to the total flight delay time.'
-;
 
 *
-Methodology: Use PROC MEANS to compute mean of WeatherDelay, and output the 
-results to a temporary dataset. use PROC SORT to extract and sort the 
-WeatherDelay mean by the month from the temporary dataset.
+Methodology: Use PROC FREQ to count all the number of flight across all carriers.
 
-Limitations: This methodology does not account for missing values for arrive
-delay time and as well as missing labels for months.
+Limitations: This methodology does not account for missing values for some carriers.
 
 Possible Follow-up Steps: We can clean the data and convert missing values cell
 to "." so that SAS knows it's a missing value and exclude it from the 
-calculation of Mean. 
+calculation of Mean. We can also collect data regarding number of aircraft and
+aircraft size to add more dept into this reserach question. 
 ;
 
-proc means MEAN noprint data=flights_analytic_file;
-    class Month;
-    var WeatherDelay;
-    output out=flights_analytic_file_temp;
-run;
-
-proc sort data=flights_analytic_file_temp(where=(_STAT_="MEAN"));
-    by descending WeatherDelay;
-run;
-
-proc print noobs data=flights_analytic_file_temp(obs=20);
-    id Month;
-    var WeatherDelay;
+proc freq data = flights_analytic_file order=freq;
+	table UniqueCarrier;
 run;
 title;
 footnote;
