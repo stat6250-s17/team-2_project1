@@ -129,7 +129,7 @@ Use PROC MEANS to compute the mean of DepDelay for each Origin
 Use PROC SORT extract and sort just the means the temporary dateset
 ;
 
-proc means data=flights_analytic_file;
+proc means noprint data=flights_analytic_file;
 	class Origin;
 	var DepDelay;
 	output out=temp;
@@ -174,7 +174,8 @@ run;
 
 
 proc means 
-	mean noprint 
+	mean 
+	noprint 
 	data=flights_analytics_q1_temp
 	;
 	class 
