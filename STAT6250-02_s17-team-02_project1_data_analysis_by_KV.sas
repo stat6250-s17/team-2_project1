@@ -76,29 +76,24 @@ footnote;
 
 title1
 'Research Question: What is the average flight delay time correspoding to the month of the year?'
-'Research Question: Number of flight for each carrier?'
 ;
   
 title2
 'Rational: We want to know which months tend to have higher delay time so we can avoid traveling during those months.'
 ;
-'Rationale: For investors who want to invest in airline stock, they might want to know which carrier has the most number of flights and which carrier has the lowest number of flights'
   
 footnote1
 'October seems to be the month that has the lowest flight delay time which is about 31.39 minutes on average.'
-'Southwest Airlines Co. (WN)  seems to have the highest number of flight with 114664 flights in three months compared to other carriers.'
 ;
   
 
 footnote2
 'December has the highest flight delay time which is about 49.48 minutes on average.'
-'Aloha Airlines Inc. (AQ) seems to have the lowest number of flight with only 750 flights in three months compared to other carriers.'
 ;
   
 footnote3
 'So the best month to travel with the lowest flight delay time is October. It would be interesting to look a bit deeper at the months across all the carriers.'
-'This might not be a good comparison by just looking at the lowest and highest number of flight. We also need to take into the account of how many aircrafs they have and the size of the aircraft and we do not access to those data.'
- ;
+;
   
 *
 Methodology: Use PROC MEANS to compute mean of ArrDelay, and output the 
@@ -137,6 +132,7 @@ title1
 
 title2
 'Rationale: For investors who want to invest in airline stock, they might want to know which carrier has the most number of flights and which carrier has the lowest number of flights'
+;
 
 footnote1
 'Southwest Airlines Co. (WN)  seems to have the highest number of flight with 114664 flights in three months compared to other carriers.'
