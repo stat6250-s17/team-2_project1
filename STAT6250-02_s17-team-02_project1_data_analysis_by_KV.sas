@@ -31,11 +31,11 @@ title2
 ;
 
 footnote1
-'Based on the above output, Messa Airline Inc. (YV) has the longest flight delay time on average which is 55.29 minutes.'
+'Based on the above output, Messa Airline Inc. (YV) has the longest flight delay time on average which is 62 minutes.'
 ;
 
 footnote2
-'Frontier Airlines has the lowest flight delay time which is 27.92 minutes.'
+'Frontier Airlines has the lowest flight delay time which is 26 minutes.'
 ;
 
 footnote3
@@ -83,16 +83,16 @@ title2
 ;
   
 footnote1
-'October seems to be the month that has the lowest flight delay time which is about 31.39 minutes on average.'
+'Janaury seems to be the month that has the lowest flight delay time which is about 42 minutes on average.'
 ;
   
 
 footnote2
-'December has the highest flight delay time which is about 49.48 minutes on average.'
+'March has the highest flight delay time which is about 45 minutes on average.'
 ;
   
 footnote3
-'So the best month to travel with the lowest flight delay time is October. It would be interesting to look a bit deeper at the months across all the carriers.'
+'So the best month to travel with the lowest flight delay time is Janaury. It would be interesting to look a bit deeper at the months across all the carriers.'
 ;
   
 *
