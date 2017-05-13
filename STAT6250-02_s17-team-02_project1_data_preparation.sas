@@ -45,7 +45,7 @@ proc http
 run;
 proc import
 	file=tempfile
-	out=flights_raw
+	out=flights_raw replace
 	dbms=csv;
 run;
 filename tempfile clear;
@@ -161,7 +161,7 @@ Use PROC SORT extract and sort just the means the temporary dataset.
 data flights_analytics_q1;
 	set  flights_analytic_file;
 	keep UniqueCarrier WeatherDelay;
-	if WeatherDelay not in ('0','NA');
+	if WeatherDelay not in (0);
 run;
 
 data flights_analytics_q1_temp;
@@ -216,7 +216,7 @@ Use PROC SORT extract and sort just the means the temporary dataset.
 data flights_analytics_weather;
 	set flights_analytic_file;
 	keep Origin WeatherDelay;
-	if WeatherDelay not in ('0','NA') ;
+	if WeatherDelay not in (0) ;
 run;
 
 data flights_analytics_weather_2;
