@@ -147,36 +147,30 @@ run;
 
 
 *
-Use DATA statement to create new weather dataset flights_analytics_q1 having
-only required field UniqueCarrier and WeatherDelay to analyze the weather 
-delay impact on each Origin Airport by excluding the records where there is 
-no delay due to weather.
-Create new temporary dataset flights_analytics_q1_temp to change the datatype 
-of WeatherDelay from string to numeric to be ready for statistics procedures.
-Use PROC MEANS to compute the mean of WeatherDelay for each Airline, and 
-output the results to a temporary dataset "flights_analytic_file_temp_q1".
-Use PROC SORT extract and sort just the means the temporary dataset.
+Use DATA statement to create new weather dataset flights_analytics_weather
+having only required field UniqueCarrier, Origin and WeatherDelay to analyze 
+the weather delay impact on each Origin Airport UniqueCarrier and by excluding
+the records where there is no delay due to weather.
 ;
 
-data flights_analytics_q1;
+data flights_analytics_weather;
 	set  flights_analytic_file;
-	keep UniqueCarrier WeatherDelay;
+	keep UniqueCarrier Origin WeatherDelay;
 	if WeatherDelay not in (0);
 run;
 
-data flights_analytics_q1_temp;
-	set flights_analytics_q1;
-	UniqueCarrier = UniqueCarrier;
-	newWeatherDelay = input(WeatherDelay,best4.);
-	drop WeatherDelay; 
-    rename newWeatherDelay=WeatherDelay;
-run;
+*
+Use PROC MEANS to compute the mean of WeatherDelay for each Airline, and 
+output the results to a temporary dataset "flights_analytic_file_temp_q1".
+
+Use PROC SORT extract and sort just the means the temporary dataset.
+;
 
 
 proc means 
 	mean 
 	noprint 
-	data=flights_analytics_q1_temp
+	data=flights_analytics_weather
 	;
 	class 
 	   UniqueCarrier
@@ -201,37 +195,16 @@ proc sort
 run;
 
 *
-Use DATA statement to create new weather dataset flights_analytics_weather having
-only required field Origin and WeatherDelay to analyze the weather delay impact 
-on each Origin Airport by excluding the records where there is no delay due to 
-weather.
-Create new temporary dataset flights_analytics_weather_2 to change the datatype 
-of WeatherDelay from string to numeric to be ready for statistics procedures.
 Use PROC MEANS to compute the mean of WeatherDelay for each Origin Airport, and 
 output the results to a temporary dataset "flights_analytic_file_temp_q2".
+
 Use PROC SORT extract and sort just the means the temporary dataset.
 ;
 
 
-data flights_analytics_weather;
-	set flights_analytic_file;
-	keep Origin WeatherDelay;
-	if WeatherDelay not in (0) ;
-run;
-
-data flights_analytics_weather_2;
-	set flights_analytics_weather;
-	Origin = Origin;
-	newWeatherDelay = input(WeatherDelay,best4.);
-	drop WeatherDelay; 
-    rename newWeatherDelay=WeatherDelay;
-run;
-
-
-
 proc means 
 	mean noprint 
-	data=flights_analytics_weather_2
+	data=flights_analytics_weather
 	;
 	class 
 	   Origin
@@ -252,6 +225,9 @@ proc sort
 	descending WeatherDelay
 	;
 run;
+
+
+
 
 *
 Use PROC SORT to sort the flights_analytic_file datset by Unique Airline Code and 
