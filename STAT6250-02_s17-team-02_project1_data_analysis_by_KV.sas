@@ -35,7 +35,7 @@ footnote1
 ;
 
 footnote2
-'Frontier Airlines has the lowest flight delay time which is 26 minutes.'
+'Aloha Airlines has the lowest flight delay time which is 21 minutes.'
 ;
 
 footnote3
