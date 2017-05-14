@@ -66,7 +66,7 @@ proc sort data=flights_analytic_file_temp(where=(_STAT_="MEAN"));
     by descending ArrDelay;
 run;
 
-proc print noobs data=flights_analytic_file_temp(obs=20);
+proc print noobs data=flights_analytic_file_temp;
     id UniqueCarrier;
     var ArrDelay;
 run;
@@ -118,7 +118,7 @@ proc sort data=flights_analytic_file_temp(where=(_STAT_="MEAN"));
     by descending ArrDelay;
 run;
  
-proc print noobs data=flights_analytic_file_temp(obs=20);
+proc print noobs data=flights_analytic_file_temp;
     id Month;
     var ArrDelay;
 run;
