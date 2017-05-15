@@ -85,7 +85,6 @@ data flights_analytic_file;
 		DepDelay
 		Diverted
 		WeatherDelay
-		NASDelay
 		SecurityDelay
 		LateAircraftDelay
 		;
@@ -105,7 +104,6 @@ data flights_analytic_file;
 		DepDelay
 		Diverted
 		WeatherDelay
-		NASDelay
 		SecurityDelay
 		LateAircraftDelay
 		;
