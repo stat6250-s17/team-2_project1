@@ -66,9 +66,14 @@ proc sort data=flights_analytic_file_temp(where=(_STAT_="MEAN"));
     by descending ArrDelay;
 run;
 
+proc format;
+	value $UniqueCarrier
+		'YV' = 'Messa Airline Inc. (YV)'
 proc print noobs data=flights_analytic_file_temp;
     id UniqueCarrier;
     var ArrDelay;
+    where not(missing(UniqueCarrier));
+    format UniqueCarrier $UniqueCarrier
 run;
 title;
 footnote;
@@ -107,9 +112,10 @@ Possible Follow-up Steps: We can clean the data and convert missing values cell
 to "." so that SAS knows it's a missing value and exclude it from the 
 calculation of Mean. 
 ;
+
  
 proc means mean noprint data=flights_analytic_file;
-    class Month;
+    class Month UniqueCarrier;
     var ArrDelay;
     output out=flights_analytic_file_temp;
 run;
@@ -121,6 +127,7 @@ run;
 proc print noobs data=flights_analytic_file_temp;
     id Month;
     var ArrDelay;
+    where not(missing(Month));
 run;
 title;
 footnote;
