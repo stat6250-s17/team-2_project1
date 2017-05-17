@@ -15,11 +15,11 @@ See included file for dataset properties
 
 * environmental setup;
 
-* watch out for typos;
+* IL: watch out for typos;
 * set relative file import path to current directory (using standard SAS trick;
 X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";
 
-* be sure to update comments from templates so they match your project;
+* IL: be sure to update comments from templates so they match your project;
 * load external file that generates analytic dataset FRPM1516_analytic_file;
 %include '.\STAT6250-02_s17-team-02_project1_data_preparation.sas';
 
