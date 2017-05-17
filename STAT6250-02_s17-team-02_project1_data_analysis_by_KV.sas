@@ -15,9 +15,11 @@ See included file for dataset properties
 
 * environmental setup;
 
+* watch out for typos;
 * set relative file import path to current directory (using standard SAS trick;
 X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";
 
+* be sure to update comments from templates so they match your project;
 * load external file that generates analytic dataset FRPM1516_analytic_file;
 %include '.\STAT6250-02_s17-team-02_project1_data_preparation.sas';
 
@@ -66,9 +68,19 @@ proc sort data=flights_analytic_file_temp(where=(_STAT_="MEAN"));
     by descending ArrDelay;
 run;
 
+*IL: consider using a format, like the one started below;
+proc format;
+    value $UniqueCarrier
+        'YV'='Messa Airline Inc. (YV)'
+    ;
+run;
+
 proc print noobs data=flights_analytic_file_temp;
     id UniqueCarrier;
     var ArrDelay;
+*IL: consider filtering out missing values;
+    where not(missing(UniqueCarrier));
+    format UniqueCarrier $UniqueCarrier.;
 run;
 title;
 footnote;
@@ -109,7 +121,7 @@ calculation of Mean.
 ;
  
 proc means mean noprint data=flights_analytic_file;
-    class Month;
+    class Month UniqueCarrier;
     var ArrDelay;
     output out=flights_analytic_file_temp;
 run;
@@ -121,9 +133,21 @@ run;
 proc print noobs data=flights_analytic_file_temp;
     id Month;
     var ArrDelay;
+*IL: consider filtering out missing values;
+    where not(missing(Month));
 run;
 title;
 footnote;
+
+* or consider the proc sql alternative;
+proc sql;
+    create table flights_analytic_file_temp as
+        select Month, UniqueCarrier, avg(ArrDelay) as ArrDelay_avg
+        from flights_analytic_file
+        group by Month, UniqueCarrier
+        order by Month, UniqueCarrier desc
+    ;
+quit;
  
 
 title1
@@ -159,7 +183,7 @@ aircraft size to add more dept into this reserach question.
 ;
 
 proc freq data = flights_analytic_file order=freq;
-	table UniqueCarrier;
+    table UniqueCarrier;
 run;
 title;
 footnote;
